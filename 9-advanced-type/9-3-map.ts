@@ -20,7 +20,7 @@
 
   //이렇게도 쓸 수 있다. 재사용성이 좋다.
   const animal: Optional<Animal> = {
-    name: 'dog',
+    name: "dog",
   };
 
   //
@@ -29,9 +29,9 @@
   };
 
   const video: ReadOnly<Video> = {
-    title: 'sf',
-    author: 'kyo',
-    description: 'hey...',
+    title: "sf",
+    author: "kyo",
+    description: "hey...",
   };
 
   type Nullable<T> = { [P in keyof T]: T[P] | null };
