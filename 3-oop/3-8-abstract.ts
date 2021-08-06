@@ -14,16 +14,15 @@
   //  상속 !!!
   // abastract 키워드를 붙이면 커피머신은 그 자체로 object를 만들지 못한다.  그러면 부모로서 필요한 것을 정의하는 용도로만 사용
   abstract class CoffeeMachine implements CoffeeMaker {
-    ㅇ;
     private static BEANS_GRAMM_PER_SHOT = 7;
     private coffeeBeans: number = 0;
     clean() {
-      console.log("cleaning the machine");
+      console.log('cleaning the machine');
     }
 
     fillCoffeeBeans(beans: number) {
       if (beans < 0) {
-        throw new Error("value for beans should be greater than 0");
+        throw new Error('value for beans should be greater than 0');
       }
       this.coffeeBeans += beans;
     }
@@ -39,13 +38,13 @@
     private grindBeans(shots: number) {
       console.log(`grinding beans for ${shots}`);
       if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT) {
-        throw new Error("Not enough coffee");
+        throw new Error('Not enough coffee');
       }
       this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
     }
 
     private preheat(): void {
-      console.log("heating up....");
+      console.log('heating up....');
     }
 
     protected abstract extract(shots: number): CoffeeCup;
@@ -68,7 +67,7 @@
       super(beans); // super() 자체가 부모의 constructor이다.
     }
     private steamMilk(): void {
-      console.log("steaming some milk");
+      console.log('steaming some milk');
     }
 
     protected extract(shots: number): CoffeeCup {
@@ -94,7 +93,7 @@
       super(beans);
     }
     private sugar(): void {
-      console.log("add sugar");
+      console.log('add sugar');
     }
     protected extract(shots: number): CoffeeCup {
       this.sugar();
@@ -120,12 +119,12 @@
 
   const machines: CoffeeMaker[] = [
     // new CoffeeMachine(16),
-    new CaffeLatteMachine(16, "2"),
-    new SweetCoffeeMaker(22, "22"),
+    new CaffeLatteMachine(16, '2'),
+    new SweetCoffeeMaker(22, '22'),
   ];
 
   machines.forEach((machine) => {
-    console.log("---------------------");
+    console.log('---------------------');
     machine.makeCoffee(1);
   });
 }

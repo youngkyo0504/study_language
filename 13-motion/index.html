@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script  type ='module' src="./build/main.js" ></script>
+    <link rel="stylesheet" href="./asset/index.css">
+  </head>
+
+  <body>
+    <nav>
+      <div class="insert_btn">IMAGE</div>
+      <div class="insert_btn">VIDEO</div>
+      <div class="insert_btn">NOTE</div>
+      <div class="insert_btn">TODO</div>
+    </nav>
+
+
+    <script>
+      function dragover_handler(ev) {
+       ev.preventDefault();
+       ev.dataTransfer.dropEffect = "move";
+       // 기본 액션을 막음 (링크 열기같은 것들)
+  
+  // 드래그한 요소를 드롭 대상으로 이동
+  if (event.target.id == "p1") {
+    event.target.style.background = "";
+    dragged.parentNode.removeChild( dragged );
+    event.target.appendChild( dragged );
+  }
+      }
+      function drop_handler(ev) {
+       ev.preventDefault();
+       if (event.target.id == "target") {
+    event.target.style.background = "";
+  }
+       // Get the id of the target and add the moved element to the target's DOM
+       const data = ev.dataTransfer.getData("text/plain");
+       console.log(  data, ev.currentTarget)
+       ev.currentTarget.insertAdjacentHTML('beforebegin',data)
+      //  ev.currentTarget.nextSibling(document.createRange().createContextualFragment(data))
+       
+      }
+      </script>
+      
+      <p id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">Drop Zone</p>
+
+
+
+
+
+<div draggable="true" id='p1'   ondrop="drop_handler(event)" ondragover="dragover_handler(event)">hello my name is kyoyoung</div>
+    <script>
+      function dragstart_handler(ev) {
+        console.log(ev)
+        ev.currentTarget.classList.add('draggling')
+        let img = new Image();
+        ev.dataTransfer.effectAllowed = "move";
+  img.src = 'https://media0.giphy.com/media/AxVvjOTeDz1EhGVfHy/giphy.gif?cid=ecf05e47x3pj5c3omod64n37u8vy5zgukofxfmv5345c5q4b&rid=giphy.gif&ct=g';
+  ev.dataTransfer.setDragImage(img, 10, 10);
+        // Add the target element's id to the data transfer object
+        // ev.dataTransfer.setData("text/plain", ev.target.id);
+        ev.dataTransfer.setData("text/plain", ev.currentTarget.outerHTML);
+        console.log(ev.target,ev.currentTarget)
+        
+      }
+    
+      window.addEventListener('DOMContentLoaded', () => {
+        // Get the element by id
+        document.addEventListener("drag", function(event) {
+
+}, false);
+document.addEventListener("dragstart", function(event) {
+  // 드래그한 요소에 대한 참조 변수
+  dragged = event.target;
+  // 요소를 반투명하게 함
+  event.target.style.opacity = .5;
+}, false);
+document.addEventListener("dragend", function(event) {
+  // 투명도를 리셋
+  event.target.style.opacity = "";
+}, false);
+document.addEventListener("dragend", function(event) {
+  // 투명도를 리셋
+  event.target.style.opacity = "";
+}, false);
+
+/* 드롭 대상에서 이벤트 발생 */
+document.addEventListener("dragover", function(event) {
+  // 드롭을 허용하도록 prevetDefault() 호출
+  event.preventDefault();
+}, false);
+
+document.addEventListener("dragenter", function(event) {
+  // 요소를 드롭하려는 대상 위로 드래그했을 때 대상의 배경색 변경
+  if (event.target.id == "target") {
+    event.target.style.background = "purple";
+  }
+
+}, false);
+
+
+        const element = document.getElementById("p1");
+        // Add the ondragstart event listener
+        element.addEventListener("dragstart", dragstart_handler,false);
+      });
+    </script>
+  </body>
+</html>
