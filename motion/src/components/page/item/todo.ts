@@ -1,23 +1,16 @@
-import { BaseComponent } from '../../component.js';
-
+import { BaseComponent } from './../../component.js';
 export class TodoComponent extends BaseComponent<HTMLElement> {
   constructor(title: string, todo: string) {
     super(`<section class="todo">
-        <div class="todo__holder">
-            <h2 class="todo__title"></h2>
-            <input class="todo_checkBox" type="checkbox">
-        </div>
-    </section>`);
+            <h2 class="page-item__title todo__title"></h2>  
+            <input type="checkbox" id="todo-checkbox"/>
+            <label for="todo-checkbox" class="todo-label"></label>
+        </section>`);
 
-    const labelElement = this.element.querySelector(
-      '.todo_checkBox'
-    )! as HTMLInputElement;
-    console.log(labelElement, title);
-    labelElement.textContent = todo;
-
-    const titleElement = this.element.querySelector(
-      '.todo__title'
-    )! as HTMLHeadElement;
+    const titleElement = this.element.querySelector('.todo__title')! as HTMLHeadElement;
     titleElement.textContent = title;
+
+    const todoElement = this.element.querySelector('.todo-label')! as HTMLLabelElement;
+    todoElement.textContent = todo;
   }
 }

@@ -9,8 +9,11 @@ export class BaseComponent {
     }
     removeFrom(parent) {
         if (parent !== this.element.parentElement) {
-            throw new Error('parent mismatch');
+            throw new Error('Parent mismatch!');
         }
         parent.removeChild(this.element);
+    }
+    attach(component, position) {
+        component.attachTo(this.element, position);
     }
 }
